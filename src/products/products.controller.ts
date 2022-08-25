@@ -22,4 +22,10 @@ export class ProductsController {
     getAllProducts() {
         return this.productsService.getProducts();
     }
+
+
+    @Get('download')
+    getProductCsv() {
+        return this.productsService.getProductCsv();
+    }
 }
