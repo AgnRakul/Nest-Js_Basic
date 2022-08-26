@@ -19,9 +19,9 @@ export const GenerateCsv = (prodId: string, title: string, desc: string, price: 
 
         fs.readFile('product.csv', 'utf-8', function (err, data) {
 
-            var firstColumn = data.includes('PRODUCT_ID,TITLE,DESCRIPTION,PRICE');
+            var headerIncludes = data.includes('PRODUCT_ID,TITLE,DESCRIPTION,PRICE');
 
-            if (firstColumn) {
+            if (headerIncludes) {
                 const CSV_DATA = `\n${prodId},${title},${desc},${price}`
 
                 return fs.writeFile('product.csv', CSV_DATA, { encoding: "utf8", flag: "a+" }, (err) => {
