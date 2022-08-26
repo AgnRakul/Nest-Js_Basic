@@ -1,5 +1,7 @@
-import { Controller, Post, Body, Get } from "@nestjs/common";
+import { Controller, Post, Body, Get, Response, StreamableFile } from "@nestjs/common";
 import { ProductsService } from "./products.service";
+import { createReadStream } from "fs";
+import { join } from "path";
 
 @Controller('products')
 export class ProductsController {
@@ -24,8 +26,13 @@ export class ProductsController {
     }
 
 
-    @Get('download')
-    getProductCsv() {
-        return this.productsService.getProductCsv();
+    @Get('/export-csv')
+    getFileCustomizedResponse(@Response({ passthrough: true }) res): StreamableFile {
+        const file = createReadStream(join(process.cwd(), 'product.csv'));
+        res.set({
+          'Content-Type': 'application/json',
+          'Content-Disposition': 'attachment; filename="product.csv'
+        })
+        return new StreamableFile(file);
     }
 }
