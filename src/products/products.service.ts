@@ -19,7 +19,7 @@ export class ProductsService {
         const CSV_DATA = `PRODUCT_ID,TITLE,DESCRIPTION,PRICE
         ${prodId},${title},${desc},${price}`
         
-        fs.writeFile(__dirname+'/product.csv',CSV_DATA,{encoding: "utf8", flag: "a" }, (err) => {
+        fs.writeFile('product.csv',CSV_DATA,{encoding: "utf8", flag: "a+" }, (err) => {
             if(err) {
                 console.log(err);
             } else {
