@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
-import { GenerateCsv } from "src/Helper/csv_generate";
+import { InsertDataToCsv } from "src/Helper/csv_generate";
 import { Product } from "./product.model";
+import {v4 as uuidv4} from 'uuid';
 
 
 
@@ -11,11 +12,11 @@ export class ProductsService {
 
     insertProduct(title: string, desc: string, price: number) {
 
-        const prodId = Math.floor(Math.random() * 24645643424).toString();
+        const prodId = uuidv4();
         const newProduct = new Product(prodId, title, desc, price);
         this.products.push(newProduct);
         
-        GenerateCsv(prodId, title, desc, price)
+        InsertDataToCsv(prodId, title, desc, price)
         
         return prodId;
     }
@@ -23,5 +24,7 @@ export class ProductsService {
     getProducts() {
         return [...this.products];
     }
+
+    
 
 }

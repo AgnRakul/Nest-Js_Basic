@@ -1,6 +1,9 @@
 import * as fs from 'fs';
 
-export const GenerateCsv = (prodId: string, title: string, desc: string, price: number) => {
+export const InsertDataToCsv = (prodId: string, title: string, desc: string, price: number) => {
+
+    console.log(prodId, title, desc, price);
+    
 
     const fileExists = fs.existsSync('product.csv');
 
@@ -8,11 +11,8 @@ export const GenerateCsv = (prodId: string, title: string, desc: string, price: 
         const CSV_DATA = `PRODUCT_ID,TITLE,DESCRIPTION,PRICE\n${prodId},${title},${desc},${price}`
 
         return fs.writeFile('product.csv', CSV_DATA, { encoding: "utf8", flag: "a+" }, (err) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log("File Create Successfully Data Written");
-            }
+            
+            err ? console.log(err) : console.log("File Create Successfully Data Written"); 
         });
 
     } else {
@@ -25,11 +25,11 @@ export const GenerateCsv = (prodId: string, title: string, desc: string, price: 
                 const CSV_DATA = `\n${prodId},${title},${desc},${price}`
 
                 return fs.writeFile('product.csv', CSV_DATA, { encoding: "utf8", flag: "a+" }, (err) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log("Row Inserted Successfully");
-                    }
+
+                    if(err) console.log(err)
+
+                    console.log("Row Inserted Successfully"); 
+                    
                 });
             }
 
