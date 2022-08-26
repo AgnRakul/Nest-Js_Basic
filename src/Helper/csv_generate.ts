@@ -40,7 +40,7 @@ export const GenerateCsv = (prodId:string, title:string, desc:string, price:numb
                         if (err) {
                             console.log(err);
                         } else {
-                            console.log("Data Saved");
+                            console.log("Row Inserted Successfully");
 
                         }
                     });
