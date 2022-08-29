@@ -9,11 +9,12 @@ export class ProductsController {
     constructor(private readonly productsService: ProductsService) { }
     @Post()
     addProduct(
+        @Body('user_id') prodUserID: number,
         @Body('title') prodTitle: string, 
         @Body('description') prodDesc: string, 
         @Body('price') prodPrice: number
         ) {
-        const generatedId = this.productsService.insertProduct(prodTitle, prodDesc, prodPrice);
+        const generatedId = this.productsService.insertProduct(prodUserID,prodTitle, prodDesc, prodPrice);
         return {
             id:generatedId
 

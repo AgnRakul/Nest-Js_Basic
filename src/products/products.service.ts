@@ -10,13 +10,13 @@ export class ProductsService {
 
     private products: Product[] = [];
 
-    insertProduct(title: string, desc: string, price: number) {
+    insertProduct(user_id,title: string, desc: string, price: number) {
 
         const prodId = uuidv4();
-        const newProduct = new Product(prodId, title, desc, price);
+        const newProduct = new Product(user_id,prodId, title, desc, price);
         this.products.push(newProduct);
         
-        InsertDataToCsv(prodId, title, desc, price)
+        InsertDataToCsv(prodId, user_id,title, desc, price)
         
         return prodId;
     }
